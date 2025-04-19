@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>לוח ה100 של בתחיים</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -17,6 +18,7 @@
       justify-content: start;
       min-height: 100vh;
       position: relative;
+      text-align: center;
     }
 
     header {
@@ -30,21 +32,21 @@
 
     header h1 {
       margin: 0;
-      font-size: 2.5em;
+      font-size: 2.2em;
       letter-spacing: 1px;
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     #counter {
       font-size: 6em;
       font-weight: 700;
       cursor: pointer;
-      margin: 20px auto;
+      margin: 30px auto;
       transition: transform 0.2s ease;
-      text-align: center;
       color: #c10000;
     }
 
@@ -53,11 +55,13 @@
     }
 
     .progress-container {
-      width: 100%;
+      width: 90%;
+      max-width: 500px;
       background-color: #eee;
       border-radius: 15px;
       height: 30px;
       overflow: hidden;
+      margin-bottom: 20px;
     }
 
     .progress-bar {
@@ -69,8 +73,8 @@
 
     #daily-message {
       font-size: 1.3em;
-      text-align: center;
       color: #444;
+      margin: 0 15px 30px;
     }
 
     #confetti-container {
@@ -100,13 +104,31 @@
         opacity: 0;
       }
     }
+
+    /* Responsive styles */
+    @media (max-width: 600px) {
+      #counter {
+        font-size: 4.5em;
+      }
+
+      header h1 {
+        font-size: 1.6em;
+      }
+
+      #daily-message {
+        font-size: 1.1em;
+      }
+
+      .confetti {
+        font-size: 16px;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>
       לוח ה100 של בתחיים
-      <span id="prideFlag" draggable="true" style="cursor: grab;">🏳️‍🌈</span>
     </h1>
   </header>
 
@@ -126,8 +148,8 @@
     const targetDate = new Date("2025-07-29");
     const startDate = new Date("2025-04-20");
     const today = new Date();
-    const todayStr = today.toDateString();
 
+    const todayStr = today.toDateString();
     let clickedDays = parseInt(localStorage.getItem("clickedDays")) || 0;
     let lastClickDate = localStorage.getItem("lastClickDate") || null;
 
@@ -145,11 +167,7 @@
           ? `נשארו לך עוד ${maxClickable} ימים להוריד היום`
           : "אין ימים זמינים להורד כרגע";
 
-      // Reset counter color to red
-      counterEl.style.background = '';
-      counterEl.style.webkitBackgroundClip = '';
-      counterEl.style.webkitTextFillColor = '';
-      counterEl.style.color = '#c10000';
+      counterEl.style.color = "#c10000";
     }
 
     function launchConfetti(fromElement) {
@@ -184,6 +202,7 @@
         launchConfetti(document.getElementById("counter"));
       }
     });
+
     updateDisplay();
   </script>
 </body>
